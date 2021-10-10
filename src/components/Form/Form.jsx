@@ -1,22 +1,24 @@
-import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-import PropTypes from "prop-types";
+import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+// import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-import styles from "./Form.module.css";
+import * as actions from '../../redux/actions';
+import styles from './Form.module.css';
 
-export default function Form(props) {
-  const [name, setName] = useState("");
-  const [number, setNumber] = useState("");
+function Form({ addContact }) {
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     const { name, value } = event.currentTarget;
 
     switch (name) {
-      case "name":
+      case 'name':
         setName(value);
         break;
 
-      case "number":
+      case 'number':
         setNumber(value);
         break;
 
@@ -25,15 +27,15 @@ export default function Form(props) {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
-    props.addContact({ id: uuidv4(), name, number });
+    addContact({ name, number });
     reset();
   };
 
   const reset = () => {
-    setName("");
-    setNumber("");
+    setName('');
+    setNumber('');
   };
 
   return (
@@ -70,6 +72,12 @@ export default function Form(props) {
   );
 }
 
-Form.propTypes = {
-  addContact: PropTypes.func.isRequired,
-};
+// Form.propTypes = {
+//   addContact: PropTypes.func.isRequired,
+// };
+
+const mapDispatchToProps = dispatch => ({
+  addContact: newContact => dispatch(actions.addNewContact(newContact)),
+});
+
+export default connect(null, mapDispatchToProps)(Form);

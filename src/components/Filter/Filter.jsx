@@ -1,7 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+// import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-import styles from "./Filter.module.css";
+import * as actions from '../../redux/actions';
+import styles from './Filter.module.css';
 
 function Filter({ value, onChange }) {
   return (
@@ -18,9 +20,19 @@ function Filter({ value, onChange }) {
   );
 }
 
-Filter.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+// Filter.propTypes = {
+//   value: PropTypes.string.isRequired,
+//   onChange: PropTypes.func.isRequired,
+// };
+
+const mapStateToProps = state => {
+  return {
+    value: state.filter,
+  };
 };
 
-export default Filter;
+const mapDispatchToProps = dispatch => ({
+  onChange: event => dispatch(actions.changeFilter(event.currentTarget.value)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Filter);
