@@ -29,20 +29,21 @@ export default function App() {
     );
   };
 
-  const deleteContact = id => {
-    setContacts(contacts.filter(item => item.id !== id));
-  };
+  // const deleteContact = id => {
+  //   setContacts(contacts.filter(item => item.id !== id));
+  // };
 
   const filteredContacts = getContacts();
 
   return (
     <div className={styles.app}>
       <h1>Phonebook</h1>
-      {/* <Form addContact={addNewContact} /> */}
       <Form />
       <h2>Contacts</h2>
       <Filter value={filter} onChange={changeFilter} />
-      <Contacts contacts={filteredContacts} onClick={deleteContact} />
+      {/* <Filter value={filter} onChange={changeFilter} /> */}
+      <Contacts />
+      {/* <Contacts contacts={filteredContacts} onClick={deleteContact} /> */}
     </div>
   );
 }

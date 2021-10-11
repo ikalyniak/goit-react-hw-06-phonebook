@@ -18,6 +18,9 @@ const items = (state = dataContacts, { type, payload }) => {
         ? alert(`${payload.name} is already in contacts`)
         : [...state, payload];
 
+    case actionTypes.DELETE:
+      return state.filter(item => item.id !== payload);
+
     default:
       return state;
   }

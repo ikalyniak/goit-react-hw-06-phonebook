@@ -6,4 +6,9 @@ const addNewContact = ({ name, number }) => ({
   payload: { id: uuidv4(), name, number },
 });
 
-export default { addNewContact };
+const deleteContact = id => ({
+  type: actionTypes.DELETE,
+  payload: id,
+});
+
+export default { addNewContact, deleteContact };
