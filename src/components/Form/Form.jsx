@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+// import { v4 as uuidv4 } from 'uuid';
+import PropTypes from 'prop-types';
 
-import * as actions from '../../redux/actions';
+import actions from '../../redux/actions';
 import styles from './Form.module.css';
 
 function Form({ addContact }) {
@@ -72,9 +72,9 @@ function Form({ addContact }) {
   );
 }
 
-// Form.propTypes = {
-//   addContact: PropTypes.func.isRequired,
-// };
+Form.propTypes = {
+  addContact: PropTypes.func.isRequired,
+};
 
 const mapDispatchToProps = dispatch => ({
   addContact: newContact => dispatch(actions.addNewContact(newContact)),
