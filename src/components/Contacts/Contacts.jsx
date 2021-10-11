@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import actions from '../../redux/actions';
 import styles from './Contacts.module.css';
@@ -26,17 +26,22 @@ function Contacts({ onClick, contacts }) {
   );
 }
 
-// Contacts.propTypes = {
-//   onClick: PropTypes.func.isRequired,
-//   contacts: PropTypes.array.isRequired,
-// };
+Contacts.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  contacts: PropTypes.array.isRequired,
+};
 
-const mapStateToProps = state => ({
-  // contacts: state.items.filter(contact =>
-  //   contact.name.toLowerCase().includes(state.items.filter.toLowerCase()),
-  // ),
-  contacts: state.contacts.items,
-});
+const mapStateToProps = state => {
+  const { filter, items } = state.contacts;
+  const normalizedFilter = filter.toLowerCase();
+  const filteredContacts = items.filter(contact =>
+    contact.name.toLowerCase().includes(normalizedFilter),
+  );
+
+  return {
+    contacts: filteredContacts,
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
   onClick: id => dispatch(actions.deleteContact(id)),

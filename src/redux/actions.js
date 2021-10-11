@@ -3,7 +3,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 const addNewContact = ({ name, number }) => ({
   type: actionTypes.ADD,
-  payload: { id: uuidv4(), name, number },
+  payload: {
+    id: uuidv4(),
+    name,
+    number,
+  },
 });
 
 const deleteContact = id => ({
@@ -11,4 +15,10 @@ const deleteContact = id => ({
   payload: id,
 });
 
-export default { addNewContact, deleteContact };
+const changeFilter = value => ({
+  type: actionTypes.FILTER,
+  payload: value,
+});
+
+// eslint-disable-next-line import/no-anonymous-default-export
+export default { addNewContact, deleteContact, changeFilter };
