@@ -1,5 +1,5 @@
 .app {
-  color: blue;
+  color: rgb(3, 70, 133);
   text-align: center;
 }
 
@@ -8,7 +8,7 @@ button {
   margin: 5px;
   border-radius: 3px;
   border: 1px solid #ccc;
-  background-color: blue;
+  background-color: rgb(3, 70, 133);
   cursor: pointer;
   color: white;
 }
