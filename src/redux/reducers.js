@@ -1,4 +1,46 @@
 import { combineReducers } from 'redux';
+import { createReducer } from '@reduxjs/toolkit';
+
+import actions from './actions';
+import dataContacts from '../contacts.json';
+
+const items = createReducer(dataContacts, {
+  [actions.addNewContact]: (state, action) => [...state, action.payload],
+  [actions.deleteContact]: (state, action) =>
+    state.filter(item => item.id !== action.payload),
+});
+
+const filter = createReducer('', {
+  [actions.changeFilter]: (_, action) => action.payload,
+});
+
+export default combineReducers({
+  items,
+  filter,
+});
+
+/**
+ NOTE:  -----------------------------------------------
+1)
+ [actionTypes.ADD]: (state, action) => [...state, action.payload]
+ => ----- analog expression ----- =>
+'phonebook/addNewContact': (state, action) => [...state, action.payload]
+
+ 2)
+ [actions.addNewContact]
+ => ----- programmatically toString() ----- =>
+ => ----- see logger in Console as example ----- =>
+ actions.addNewContact.type
+
+ 3)
+      (_, action)  ------=> the first parameter is not used
+
+
+ */
+
+/** REDUX CORE -----------------------------------------------
+ 
+import { combineReducers } from 'redux';
 
 import actionTypes from './actionTypes';
 import dataContacts from '../contacts.json';
@@ -34,3 +76,5 @@ export default combineReducers({
   items,
   filter,
 });
+ 
+ */
