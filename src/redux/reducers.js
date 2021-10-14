@@ -5,7 +5,14 @@ import actions from './actions';
 import dataContacts from '../contacts.json';
 
 const items = createReducer(dataContacts, {
-  [actions.addNewContact]: (state, action) => [...state, action.payload],
+  // [actions.addNewContact]: (state, action) => [...state, action.payload],
+  [actions.addNewContact]: (state, action) => {
+    if (state.find(elem => elem.name === action.payload.name)) {
+      alert(`${action.payload.name} is already in contacts`);
+      return state;
+    }
+    return [...state, action.payload];
+  },
   [actions.deleteContact]: (state, action) =>
     state.filter(item => item.id !== action.payload),
 });
